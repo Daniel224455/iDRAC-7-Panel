@@ -11,6 +11,7 @@ goto AUTH_IDRAC
 goto MENU
 
 :AUTH_IDRAC
+) else ( 
   cls
   @echo.
   @echo Verifying your iDRAC credentials...
@@ -26,6 +27,7 @@ goto MENU
 
 @echo off
 :MENU
+) else (
 cls
 @echo.
 @echo ***************************************************
@@ -228,6 +230,7 @@ goto MENU
    goto IDRAC_VARIOUS
 
 :READ_USRLST
+) else (
    cls
    @echo.
    @echo Reading user list...
@@ -314,7 +317,7 @@ goto MENU
    @echo.
    @echo Press any key to return to main menu.
    pause >nul
-   goto IDRAC_ACTIONS 
+   goto IDRAC_VARIOUS
 
 :PXE_IDRAC_BOOT
 ) else (
@@ -328,7 +331,7 @@ goto MENU
    @echo.
    @echo Press any key to return to main menu.
    pause >nul
-   goto IDRAC_ACTIONS    
+   goto IDRAC_VARIOUS
 
 :CDROM_IDRAC_BOOT
 ) else (
@@ -342,7 +345,7 @@ goto MENU
    @echo.
    @echo Press any key to return to main menu.
    pause >nul
-   goto IDRAC_ACTIONS 
+   goto IDRAC_VARIOUS 
 
 :DISK_IDRAC_BOOT
 ) else (
@@ -356,7 +359,7 @@ goto MENU
    @echo.
    @echo Press any key to return to main menu.
    pause >nul
-   goto IDRAC_ACTIONS   
+   goto IDRAC_VARIOUS   
 
 :FLOPPY_IDRAC_BOOT
 ) else (
@@ -370,7 +373,7 @@ goto MENU
    @echo.
    @echo Press any key to return to main menu.
    pause >nul
-   goto IDRAC_ACTIONS       
+   goto IDRAC_VARIOUS      
 
 :IDRAC_PWR_ACT
 ) else (
