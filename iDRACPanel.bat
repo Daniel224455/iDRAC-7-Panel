@@ -200,7 +200,12 @@ goto MENU
    @echo.^<2^> Get iDRAC SEL Protocol Logs
    @echo.^<3^> Print FRU Information
    @echo.^<4^> Stress Test your Server
-   @echo.^<5^> Return to main menu
+   @echo.^<5^> Boot into BIOS
+   @echo.^<6^> Boot into PXE
+   @echo.^<7^> Boot from CDROM
+   @echo.^<8^> Boot from Main Disk
+   @echo.^<9^> Boot from Removable Media (USB)
+   @echo.^<10^> Return to main menu
    @echo.
    set /p CHOICE="Please select:"
    REM Check for valid input
@@ -210,7 +215,12 @@ goto MENU
    if "%CHOICE%" equ "2" goto SEL_ELIST
    if "%CHOICE%" equ "3" goto PRNT_FRU
    if "%CHOICE%" equ "4" goto TROLL_SRV
-   if "%CHOICE%" equ "5" goto RET_MAINMENU
+   if "%CHOICE%" equ "5" goto BIOS_IDRAC_BOOT
+   if "%CHOICE%" equ "6" goto PXE_IDRAC_BOOT
+   if "%CHOICE%" equ "7" goto CDROM_IDRAC_BOOT
+   if "%CHOICE%" equ "8" goto DISK_IDRAC_BOOT
+   if "%CHOICE%" equ "9" goto FLOPPY_IDRAC_BOOT
+   if "%CHOICE%" equ "10" goto RET_MAINMENU
    REM If input is not valid, show error message and return to IDRAC_VARIOUS
    cls
    echo Invalid option, Returning to iDRAC Various Actions menu.
@@ -291,6 +301,76 @@ goto MENU
    @echo Press any key to return to main menu.
    pause >nul
    goto IDRAC_VARIOUS 
+
+:BIOS_IDRAC_BOOT
+) else (
+   cls
+   @echo.
+   @echo Booting to BIOS   
+   ipmitool -I lanplus -H %ip% -U %user% -P %pass% chassis bootdev bios
+   ipmitool -I lanplus -H %ip% -U %user% -P %pass% power reset
+   @echo Successfully rebooted to BIOS
+   @echo.
+   @echo.
+   @echo Press any key to return to main menu.
+   pause >nul
+   goto IDRAC_ACTIONS 
+
+:PXE_IDRAC_BOOT
+) else (
+   cls
+   @echo.
+   @echo Booting to PXE   
+   ipmitool -I lanplus -H %ip% -U %user% -P %pass% chassis bootdev pxe
+   ipmitool -I lanplus -H %ip% -U %user% -P %pass% power reset
+   @echo Successfully rebooted to PXE
+   @echo.
+   @echo.
+   @echo Press any key to return to main menu.
+   pause >nul
+   goto IDRAC_ACTIONS    
+
+:CDROM_IDRAC_BOOT
+) else (
+   cls
+   @echo.
+   @echo Booting from CDROM   
+   ipmitool -I lanplus -H %ip% -U %user% -P %pass% chassis bootdev cdrom
+   ipmitool -I lanplus -H %ip% -U %user% -P %pass% power reset
+   @echo Successfully booted from CDROM
+   @echo.
+   @echo.
+   @echo Press any key to return to main menu.
+   pause >nul
+   goto IDRAC_ACTIONS 
+
+:DISK_IDRAC_BOOT
+) else (
+   cls
+   @echo.
+   @echo Booting from HDD or SSD   
+   ipmitool -I lanplus -H %ip% -U %user% -P %pass% chassis bootdev disk
+   ipmitool -I lanplus -H %ip% -U %user% -P %pass% power reset
+   @echo Successfully booted from HDD or SSD
+   @echo.
+   @echo.
+   @echo Press any key to return to main menu.
+   pause >nul
+   goto IDRAC_ACTIONS   
+
+:FLOPPY_IDRAC_BOOT
+) else (
+   cls
+   @echo.
+   @echo Booting from Removable Media   
+   ipmitool -I lanplus -H %ip% -U %user% -P %pass% chassis bootdev floppy
+   ipmitool -I lanplus -H %ip% -U %user% -P %pass% power reset
+   @echo Successfully booted from Removable Media
+   @echo.
+   @echo.
+   @echo Press any key to return to main menu.
+   pause >nul
+   goto IDRAC_ACTIONS       
 
 :IDRAC_PWR_ACT
 ) else (
