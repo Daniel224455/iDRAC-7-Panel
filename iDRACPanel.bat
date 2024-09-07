@@ -118,7 +118,7 @@ goto MENU
 ) else (
    cls
    @echo.
-   set /p percent="Enter Percentage (0-100) in hexadecimal (0x00-0x64) : "
+   set /p percent="Enter Percentage of fan speed (0-100) : "
    @echo Setting your custom fan speed....
    ipmitool -I lanplus -H %ip% -U %user% -P %pass% raw 0x30 0x30 0x02 0xff %percent%
    @echo Successfully set custom fan speed.
